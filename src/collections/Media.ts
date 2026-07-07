@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig, CollectionSlug } from 'payload'
 
 import {
   FixedToolbarFeature,
@@ -31,7 +31,7 @@ export const Media: CollectionConfig = {
     {
       name: 'folder',
       type: 'relationship',
-      relationTo: 'folders',
+      relationTo: ['folders' as CollectionSlug],
       admin: {
         position: 'sidebar',
       },

@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import { slugField, type CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
@@ -119,11 +119,10 @@ export const Pages: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    {
+    slugField({
       name: 'slug',
-      type: 'slug',
       useAsSlug: 'title',
-    },
+    }),
   ],
   hooks: {
     afterChange: [revalidatePage],
