@@ -18,6 +18,8 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const payloadSecret = process.env.PAYLOAD_SECRET || 'local-dev-payload-secret'
+const dbConnectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL || ''
 
 export default buildConfig({
   admin: {
@@ -60,7 +62,7 @@ export default buildConfig({
   editor: defaultLexical,
   db: vercelPostgresAdapter({
     pool: {
-      connectionString: process.env.POSTGRES_URL || '',
+      connectionString: dbConnectionString,
     },
   }),
   collections: [
@@ -96,7 +98,7 @@ export default buildConfig({
     }),
   ],
   globals: [Header, Footer],
-  secret: process.env.PAYLOAD_SECRET,
+  secret: payloadSecret,
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
